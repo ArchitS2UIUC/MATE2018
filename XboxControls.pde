@@ -3,14 +3,14 @@ import org.gamecontrolplus.*;
 import net.java.games.input.*;
 import processing.serial.*;
 
-ControlIO control; // dont delete this
-Configuration config; //idk some default code dont delete 
+ControlIO control; 
+Configuration config; 
 ControlDevice gpad; // object for gamepad
 Serial myPort; // creates object for communicating between arduino and processing
 int scale;
 public void setup() {
   scale = 63; // scale the power of the motors
-  size(200, 200); //idk what size does but i dont think it works without it its for the gui
+  size(200, 200); 
   // Initialise the ControlIO
   control = ControlIO.getInstance(this);
   // Find a device that matches the configuration file
@@ -19,7 +19,7 @@ public void setup() {
   myPort = new Serial(this, portName, 9600);
   if (gpad == null) {
     println("No suitable device configured");
-    System.exit(-1); // End the program NOW! ur rekt if this shows up
+    System.exit(-1); // End the program NOW!
   }
 }
 
@@ -41,12 +41,11 @@ public void draw() {
   out[4] = righttrigger;
   out[5] = lefttrigger;
   out[6] = xButton;
-  out[7] = yButton; //i did this at night and i forgot about naming conventions sorry
-  //println(out[4]);
+  out[7] = yButton; 
   for (int i = 0; i < out.length; i++) {
     print(out[i] + ", ");
   }
   println("");
-  myPort.write(out); //doesn't accept float arrays so I converted to byte array bamboozled the system
+  myPort.write(out); //doesn't accept float arrays so I converted to byte array
   delay(1000); //restrict outflow of data to prevent overclocking arduino and computer
 }
